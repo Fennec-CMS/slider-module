@@ -1,0 +1,60 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form" method="post" enctype="multipart/form-data">
+            <div class="pull-left">
+                <div class="btn-group">
+                    <a href="<?php echo $this->linkToRoute('admin-slider');?>" class="btn btn-success"><i class="fa fa-arrow-circle-left"></i> Back to list</a>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-success" type="submit"><i class="fa fa-save"></i> <?php echo $this->translate('Save');?></button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <hr>
+<?php
+
+if (isset($this->result)) {
+    $status = (isset($this->result['errors']) ? 'danger' : 'success');
+    echo Fennec\Library\Alerts::Create($status, $this->result['result']);
+}
+?>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                        <label for="title"><?php echo $this->translate('Title');?></label>
+                        <input type="text" name="title" id="title" class="form-control" required value="<?php echo (isset($this->title) ? $this->title : null);?>" maxlength="255">
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-4">
+                        <label for="url"><?php echo $this->translate('URL');?></label>
+                        <input type="text" name="url" id="url" class="form-control" value="<?php echo (isset($this->url) ? $this->url : null);?>">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <label for="image"><?php echo $this->translate('Image');?> (max. <?php echo ini_get("upload_max_filesize");?>)</label>
+                        <input type="file" name="image" id="image" data-type="input-file" accept="image/*">
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-4">
+                        <label for="startdate"><?php echo $this->translate('Start date');?></label>
+                        <input type="text" name="startdate" id="startdate" class="form-control datetime" required value="<?php echo (isset($this->startdate) ? $this->startdate : date("Y-m-d H:i"));?>">
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-4">
+                        <label for="enddate"><?php echo $this->translate('End date');?></label>
+                        <input type="text" name="enddate" id="enddate" class="form-control datetime" value="<?php echo (isset($this->enddate) ? $this->enddate : '');?>" placeholder="<?php echo $this->translate('Leave blank to be permanent');?>">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> <?php echo $this->translate('Save');?></button>
+            </div>
+        </form>
+    </div>
+</div>

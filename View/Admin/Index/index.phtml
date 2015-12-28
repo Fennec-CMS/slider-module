@@ -1,0 +1,61 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="pull-left">
+            <div class="btn-group">
+                <a href="<?php echo $this->linkToRoute('admin-slider-newbanner');?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> <?php echo $this->translate('Create new banner');?></a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 200px;"></th>
+                    <th>Title</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="tr-draggable">
+<?php
+foreach ($this->list as $banner) {
+    if ($banner->getEndDate() instanceof DateTime) {
+        $endDate = $banner->getEndDate()->format('Y-m-d H:i');
+    } else {
+        $endDate = $this->translate('Permanent');
+    }
+?>
+                <tr data-id="<?php echo $banner->getId();?>">
+                    <td>
+                      <img src="<?php echo '/uploads/slider/' . $banner->getImage();?>" style="width: 200px;">
+                    </td>
+                    <td><?php echo $banner->getTitle();?></td>
+                    <td><?php echo $banner->getStartDate()->format('Y-m-d H:i');?></td>
+                    <td><?php echo $endDate;?></td>
+                    <td>
+                      <div class="btn-group">
+                        <a href="<?php echo $this->linkToRoute('admin-slider-editbanner', array('id' => $banner->getId()));?>" class="btn btn-default">
+                          <i class="fa fa-pencil"></i>
+                        </a>
+                      
+                        <a href="<?php echo $this->linkToRoute('admin-slider-deletebanner', array('id' => $banner->getId()));?>" class="btn btn-danger btn-delete">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </div>
+                    </td>
+                </tr>
+<?php
+}
+?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style type="text/css">
+tr.placeholder {
+  height: 75px;
+  border: 2px dashed #333;
+}
+</style>
