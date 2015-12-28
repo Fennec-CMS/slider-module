@@ -36,6 +36,14 @@ class Index extends Base
      */
     public function sliderAction()
     {
+        echo $this->loadSlider();
+    }
+    
+    /**
+     * Return slider complete HTML
+     * @return string
+     */
+    public function loadSlider() {
         $template = <<<SLIDER
         <ul id="slider">
             {{CONTENT}}
@@ -55,6 +63,6 @@ SLIDER;
             $content .= '</li>' . PHP_EOL;
 		}
 		
-		echo str_replace('{{CONTENT}}', $content, $template);
+		return str_replace('{{CONTENT}}', $content, $template);
     }
 }
