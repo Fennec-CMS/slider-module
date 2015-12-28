@@ -77,7 +77,7 @@ class Index extends AdminController
                 $this->model->setStartDate($this->getPost('startdate'));
                 $this->model->setEndDate($this->getPost('enddate'));
                 
-                $this->result = $this->model->create();
+                $this->result = $this->model->save();
                 if (isset($this->result['errors'])) {
                     $this->result['result'] = implode('<br>', $this->result['errors']);
                 }
